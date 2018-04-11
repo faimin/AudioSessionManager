@@ -1,7 +1,7 @@
 //
 //  AudioSessionManager.h
 //
-//  This module routes audio output depending on device availability using the 
+//  This module routes audio output depending on device availability using the
 //  following priorities: bluetooth, wired headset, speaker.
 //
 //  It also notifies interested listeners of audio change events (optional).
@@ -11,9 +11,9 @@
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
 //  You may obtain a copy of the License at
-//  
+//
 //  http://www.apache.org/licenses/LICENSE-2.0
-//  
+//
 //  Unless required by applicable law or agreed to in writing, software
 //  distributed under the License is distributed on an "AS IS" BASIS,
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,54 +43,53 @@ extern NSString *kAudioSessionManagerDevice_Speaker;
  - kAudioSessionManagerDevice_Phone
  - kAudioSessionManagerDevice_Speaker
  */
-@property (nonatomic, assign)     NSString        *audioRoute;
+@property(nonatomic, copy) NSString *audioRoute;
 
 /**
  Returns YES if a wired headset is available.
  */
-@property (nonatomic, readonly)     BOOL             headsetDeviceAvailable;
+@property(nonatomic, readonly) BOOL headsetDeviceAvailable;
 
 /**
  Returns YES if a bluetooth device is available.
  */
-@property (nonatomic, readonly)     BOOL             bluetoothDeviceAvailable;
+@property(nonatomic, readonly) BOOL bluetoothDeviceAvailable;
 
 /**
  Returns YES if the device's earpiece is available (always true for now).
  */
-@property (nonatomic, readonly)     BOOL             phoneDeviceAvailable;
+@property(nonatomic, readonly) BOOL phoneDeviceAvailable;
 
 /**
  Returns YES if the device's speakerphone is available (always true for now).
  */
-@property (nonatomic, readonly)     BOOL             speakerDeviceAvailable;
+@property(nonatomic, readonly) BOOL speakerDeviceAvailable;
 
 /**
- Returns a list of the available audio devices. Valid values at this time are: 
-    - kAudioSessionManagerDevice_Bluetooth
-    - kAudioSessionManagerDevice_Headset
-    - kAudioSessionManagerDevice_Phone
-    - kAudioSessionManagerDevice_Speaker
+ Returns a list of the available audio devices. Valid values at this time are:
+ - kAudioSessionManagerDevice_Bluetooth
+ - kAudioSessionManagerDevice_Headset
+ - kAudioSessionManagerDevice_Phone
+ - kAudioSessionManagerDevice_Speaker
  */
-@property (nonatomic, readonly)     NSArray         *availableAudioDevices;
+@property(nonatomic, readonly) NSArray *availableAudioDevices;
 
 /**
  Returns the AudioSessionManager singleton, creating it if it does not already exist.
  */
-+ (AudioSessionManager *)sharedInstance;
++ (instancetype)sharedInstance;
 
 /**
  Switch between recording and playback modes. Returns NO if the mode change failed.
-
  @param value must be kAudioSessionManagerMode_Record or kAudioSessionManagerMode_Playback
-*/
+ */
 - (BOOL)changeMode:(NSString *)value;
 
 /**
  Initialize by detecting all available devices and selecting one based on the following priority:
-    - bluetooth
-    - headset
-    - speaker 
+ - bluetooth
+ - headset
+ - speaker
  */
 - (void)start;
 
